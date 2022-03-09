@@ -1,12 +1,11 @@
 from faker import Faker
 fake = Faker(locale='en_CA')
 # --------------locators section-----------------
-app = 'Moodle'
+app = 'Advantage Shopping'
 safe_pay_user = 'spuser'
 safe_pay_pass ='Pass123'
 aos_url = 'https://advantageonlineshopping.com/#/'
 aos_home_page_title = '\xa0Advantage Shopping'
-test = ' '
 
 # ------------------data section-----------------
 first_name = fake.first_name()
