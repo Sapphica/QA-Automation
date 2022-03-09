@@ -6,7 +6,6 @@ import aos_locators as locators
 import aos_methods as methods
 
 methods.setUp()
-breakpoint()
 methods.adduser()
 methods.logout()
 methods.login()
