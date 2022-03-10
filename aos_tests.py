@@ -5,31 +5,14 @@ import unittest
 import aos_locators as locators
 import aos_methods as methods
 
-methods.setUp()
-methods.adduser()
-methods.logout()
-methods.login()
-methods.logout()
-methods.tearDown()
-print('''             /\.../\          
-            (  •.•  )           
-             ..=*=..            
-        **~~( \.||./ )  ©Have a kitty day! ''')
+class AosAppPositiveTestCases(unittest.TestCase):
 
-
-# class AosAppPositiveTestCases(unittest.TestCase):
-#
-#     @staticmethod
-#     def test_create_new_user():
-#         methods.setUp()
-#         methods.adduser()
-#         methods.logout()
-#         methods.login()
-#         methods.logout()
-#         methods.tearDown()
-#
-#
-
-
-
-
+    @staticmethod
+    def test_create_new_user():
+        methods.setUp()
+        methods.adduser()
+        methods.logout()
+        methods.login()
+        methods.topmenu()
+        methods.logout()
+        methods.tearDown()

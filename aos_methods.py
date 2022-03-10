@@ -78,8 +78,37 @@ def login():
     print(f'User name {aos_locators.new_username} Assert is Successful.')
     sleep(st)
 
+def topmenu():
+    print('--------------------~*~--------------------')
+    for r in range(len(aos_locators.list_ass)):
+        ass = aos_locators.list_ass[r]
+        sleep(st)
+    assert driver.find_element(By.XPATH, f'//*[contains(.,"{ass}")]').is_displayed()
+    print(f'Assertion {aos_locators.list_ass} Detected.')
+    driver.find_element(By.LINK_TEXT, 'SPECIAL OFFER').click()
+    sleep(1)
+    driver.find_element(By.LINK_TEXT, 'POPULAR ITEMS').click()
+    sleep(1)
+    driver.find_element(By.LINK_TEXT, 'CONTACT US').click()
+    sleep(1)
+    driver.find_element(By.XPATH, '//option[contains(@label, "Laptops")]').click()
+    driver.find_element(By.XPATH, '//option[contains(@label, "HP Pavilion 15z Laptop")]').click()
+    driver.find_element(By.NAME, 'emailContactUs').send_keys(aos_locators.email)
+    driver.find_element(By.NAME, 'subjectTextareaContactUs').send_keys(aos_locators.kitty)
+    sleep(1)
+    driver.find_element(By.ID, 'send_btnundefined').click()
+    assert driver.find_element(By.LINK_TEXT, 'CONTINUE SHOPPING').is_displayed()
+    # for r in range(len(aos_locators.list_social)):
+    #     soc = aos_locators.list_social[r]
+    #     sleep(st)
+    # assert driver.find_element(By.NAME, f'{soc}').is_displayed()
+    assert driver.find_element(By.NAME, 'follow_facebook').is_displayed()
+    assert driver.find_element(By.NAME, 'follow_twitter').is_displayed()
+    assert driver.find_element(By.NAME, 'follow_linkedin').is_displayed()
+    print('Assertion done on Social Media links')
+    driver.find_element(By.LINK_TEXT, 'CONTINUE SHOPPING').click()
+
 def logger(action):
-    # create variable to store the file content
     old_instance = sys.stdout
     log_file = open('message.log', 'a')  # open log file and append a record
     sys.stdout = log_file
@@ -89,3 +118,8 @@ def logger(action):
           f'{action}')
     sys.stdout = old_instance
     log_file.close()
+
+#
+# setUp()
+# topmenu()
+# # # adduser()

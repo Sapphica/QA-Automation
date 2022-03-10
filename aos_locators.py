@@ -1,3 +1,5 @@
+# !/usr/bin/env python3  Line 1
+# -*- coding: Windows-1252 -*- Line 2
 from faker import Faker
 fake = Faker(locale='en_CA')
 # --------------locators section-----------------
@@ -19,8 +21,19 @@ postal = fake.postcode()
 province = fake.province()[:10]
 address = fake.street_address()
 
+# Input from faker
 list_reg = ['usernameRegisterPage', 'emailRegisterPage', 'passwordRegisterPage', 'confirm_passwordRegisterPage',
 'first_nameRegisterPage', 'last_nameRegisterPage', 'phone_numberRegisterPage', 'cityRegisterPage',
 'state_/_province_/_regionRegisterPage', 'postal_codeRegisterPage', 'addressRegisterPage']
 list_vars = [new_username, email, new_password, new_password, first_name, last_name, phone, city,
 province, postal, address]
+
+# Page assertion
+list_ass = ['dvantage', 'SPEAKERS', 'TABLETS', 'HEADPHONES', 'LAPTOPS', 'MICE']
+list_social = ['follow_facebook', 'follow_twitter' 'follow_linkedin']
+
+kitty = '''.
+           /\.../\          
+           (  •.•  )           
+           ..=*=..            
+ **~~( \.||./ )  ©Have a kitty day! '''
