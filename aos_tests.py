@@ -14,5 +14,6 @@ class AosAppPositiveTestCases(unittest.TestCase):
         methods.logout()
         methods.login()
         methods.topmenu()
-        methods.logout()
+        methods.orders()
+        methods.delete_user()
         methods.tearDown()

@@ -79,12 +79,13 @@ def login():
     sleep(st)
 
 def topmenu():
+    global ass, soc
     print('--------------------~*~--------------------')
     for r in range(len(aos_locators.list_ass)):
         ass = aos_locators.list_ass[r]
         sleep(st)
     assert driver.find_element(By.XPATH, f'//*[contains(.,"{ass}")]').is_displayed()
-    print(f'Assertion {aos_locators.list_ass} Detected.')
+    print(f'Assertion {aos_locators.list_ass} Detected')
     driver.find_element(By.LINK_TEXT, 'SPECIAL OFFER').click()
     sleep(1)
     driver.find_element(By.LINK_TEXT, 'POPULAR ITEMS').click()
@@ -97,16 +98,48 @@ def topmenu():
     driver.find_element(By.NAME, 'subjectTextareaContactUs').send_keys(aos_locators.kitty)
     sleep(1)
     driver.find_element(By.ID, 'send_btnundefined').click()
+    print('Contact Form Sent')
     assert driver.find_element(By.LINK_TEXT, 'CONTINUE SHOPPING').is_displayed()
-    # for r in range(len(aos_locators.list_social)):
-    #     soc = aos_locators.list_social[r]
-    #     sleep(st)
-    # assert driver.find_element(By.NAME, f'{soc}').is_displayed()
-    assert driver.find_element(By.NAME, 'follow_facebook').is_displayed()
-    assert driver.find_element(By.NAME, 'follow_twitter').is_displayed()
-    assert driver.find_element(By.NAME, 'follow_linkedin').is_displayed()
-    print('Assertion done on Social Media links')
+    for r in range(len(aos_locators.list_social)):
+        soc = aos_locators.list_social[r]
+        sleep(st)
+    assert driver.find_element(By.NAME, f'{soc}').is_displayed()
+    print(f'Assertion {aos_locators.list_social} Detected')
     driver.find_element(By.LINK_TEXT, 'CONTINUE SHOPPING').click()
+
+def shoppingcart():
+    driver.find_element(By.ID, 'speakersTxt').click()
+    sleep(st)
+    # driver.find_element(By.CLASS_NAME, 'Bose Soundlink Bluetooth Speaker III').click()
+    # driver.find_element(By.XPATH, f'//[,"Bose Soundlink Bluetooth Speaker III")]').click()
+    # assert driver.find_element(By.XPATH, '//*[contains(., "Bose Soundlink Bluetooth Speaker III")]').is_displayed()
+    # driver.find_element(By.XPATH, '//*[contains(., "Bose Soundlink Bluetooth Speaker III")]').click()
+    driver.find_element(By.XPATH, '//*[contains(., "AddToCard")]').click()
+
+def delete_user():
+    print('--------------------~*~--------------------')
+    driver.find_element(By.ID, 'hrefUserIcon').click()
+    java_script = driver.find_element(By.XPATH, '//label[contains(.,"My account")]')
+    driver.execute_script("arguments[0].click();", java_script)
+    sleep(3)
+    assert driver.find_element(By.XPATH, f'//*[contains(.,"MY ACCOUNT")]').is_displayed()
+    print('Assertion done on My Account')
+    driver.find_element(By.CLASS_NAME, 'deleteBtnText').click()
+    sleep(st)
+    assert driver.find_element(By.CLASS_NAME, 'deleteBtnContainer').is_displayed()
+    driver.find_element(By.CLASS_NAME, 'deleteBtnContainer').click()
+    print(f'Account {aos_locators.new_username} has been Deleted.')
+    logger('Deleted')
+
+def orders():
+    print('--------------------~*~--------------------')
+    driver.find_element(By.ID, 'hrefUserIcon').click()
+    java_script = driver.find_element(By.XPATH, '//label[contains(.,"My orders")]')
+    driver.execute_script("arguments[0].click();", java_script)
+    assert driver.find_element(By.XPATH, f'//*[contains(.,"MY ORDERS")]').is_displayed()
+    print('Assertion done on My Orders')
+    sleep(st)
+    driver.find_element(By.LINK_TEXT, "CONTINUE SHOPPING").click()
 
 def logger(action):
     old_instance = sys.stdout
@@ -119,7 +152,11 @@ def logger(action):
     sys.stdout = old_instance
     log_file.close()
 
-#
+# # #
 # setUp()
-# topmenu()
-# # # adduser()
+# # login()
+# # shoppingcart()
+# # # topmenu()
+# adduser()
+# orders()
+# # delete_user()

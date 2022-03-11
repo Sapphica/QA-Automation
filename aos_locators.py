@@ -30,7 +30,7 @@ province, postal, address]
 
 # Page assertion
 list_ass = ['dvantage', 'SPEAKERS', 'TABLETS', 'HEADPHONES', 'LAPTOPS', 'MICE']
-list_social = ['follow_facebook', 'follow_twitter' 'follow_linkedin']
+list_social = ['follow_facebook', 'follow_twitter', 'follow_linkedin']
 
 kitty = '''.
            /\.../\          
