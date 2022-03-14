@@ -221,4 +221,3 @@ def logger(action):
 # # # # # # # # topmenu()
 # # #
 # # # orders()
-# # # delete_user()

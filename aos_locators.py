@@ -35,7 +35,7 @@ list_ass = ['dvantage', 'SPEAKERS', 'TABLETS', 'HEADPHONES', 'LAPTOPS', 'MICE']
 list_social = ['follow_facebook', 'follow_twitter', 'follow_linkedin']
 list_order = [full_name, address, city, province, phone]
 
-# Shopping Cart
+# Shopping Cart Gen
 def rand1():
     global rand
     rand = (random.randrange(1, 34))
