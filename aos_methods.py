@@ -8,9 +8,9 @@ import aos_locators
 import sys
 # from selenium.webdriver.support.ui import WebDriverWait
 # from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.service import Service
+# from selenium.webdriver.chrome.service import Service
 
-#Headless
+# Headless
 from selenium.webdriver.chrome.options import Options
 options = Options()
 options.add_argument("--headless")
@@ -141,9 +141,6 @@ def shoppingcart():
     driver.get(f'{aos_locators.cart}')
     item = driver.find_element(By.XPATH, '//h1[contains(@class,"roboto-regular screen768 ng-binding")]')
     print(f'Item added {item.text}')
-    # if driver.find_element(By.CLASS_NAME, 'OutOfStock') == True:
-    #     shoppingcart()
-    # else:
     driver.find_element(By.NAME, 'save_to_cart').click()
     sleep(st)
     driver.find_element(By.NAME, 'check_out_btn').click()
