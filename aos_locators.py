@@ -2,6 +2,7 @@
 # -*- coding: Windows-1252 -*- Line 2
 from faker import Faker
 fake = Faker(locale='en_CA')
+import random
 # --------------locators section-----------------
 app = 'Advantage Shopping'
 safe_pay_user = 'spuser'
@@ -12,6 +13,7 @@ aos_home_page_title = '\xa0Advantage Shopping'
 # ------------------data section-----------------
 first_name = fake.first_name()
 last_name = fake.last_name()
+full_name = f'{first_name} {last_name}'
 new_username = f'{last_name}{fake.pyint(11, 999)}'.lower()
 new_password = fake.password()
 email = f'{first_name}{fake.pyint(11, 999)}@{fake.free_email_domain()}'
@@ -31,9 +33,14 @@ province, postal, address]
 # Page assertion
 list_ass = ['dvantage', 'SPEAKERS', 'TABLETS', 'HEADPHONES', 'LAPTOPS', 'MICE']
 list_social = ['follow_facebook', 'follow_twitter', 'follow_linkedin']
+list_order = [full_name, address, city, province, phone]
 
-kitty = '''.
-           /\.../\          
-           (  •.•  )           
-           ..=*=..            
+#shopping cart
+# rand = 13
+rand = (random.randrange(1, 34))
+cart = f'https://advantageonlineshopping.com/#/product/{rand}'
+
+kitty = '''.          /\.../\       
+           (  •.•  )        
+           ..=*=..          
  **~~( \.||./ )  ©Have a kitty day! '''

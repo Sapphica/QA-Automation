@@ -8,17 +8,21 @@ import datetime
 from selenium.webdriver.common.by import By
 import aos_locators
 import sys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 # from selenium.webdriver.chrome.options import Options
-
 
 s = Service(executable_path='chromedriver.exe')
 driver = webdriver.Chrome(service=s)
-
 driver.maximize_window()
 st = 0.25  # sleep time
-
 driver.implicitly_wait(20)
 driver.get(aos_locators.aos_url)
+
+infinity = ''' /\.../\          
+              (  •.•  )           
+               ..=*=..            
+          **~~( \.||./ )  ©Shawna '''
 
 def setUp():
     if driver.current_url == aos_locators.aos_url and driver.title == aos_locators.aos_home_page_title:
@@ -60,9 +64,11 @@ def adduser():
     sleep(st)
 
 def logout():
+    print('--------------------~*~--------------------')
     driver.find_element(By.ID, 'hrefUserIcon').click()
     java_script = driver.find_element(By.XPATH, '//label[contains(.,"Sign out")]')
     driver.execute_script("arguments[0].click();", java_script)
+    print(f'User {aos_locators.new_username} has logged out')
 
 def login():
     sleep(1)
@@ -85,13 +91,21 @@ def topmenu():
         ass = aos_locators.list_ass[r]
         sleep(st)
     assert driver.find_element(By.XPATH, f'//*[contains(.,"{ass}")]').is_displayed()
-    print(f'Assertion {aos_locators.list_ass} Detected')
+    print(f'Assertion on {aos_locators.list_ass}')
     driver.find_element(By.LINK_TEXT, 'SPECIAL OFFER').click()
+    print('Special Offer has been clicked')
     sleep(1)
     driver.find_element(By.LINK_TEXT, 'POPULAR ITEMS').click()
+    print('Popular Items has been clicked')
     sleep(1)
     driver.find_element(By.LINK_TEXT, 'CONTACT US').click()
+    print('Contact US has been clicked')
     sleep(1)
+
+def contact_us():
+    print('--------------------~*~--------------------')
+    assert driver.find_element(By.LINK_TEXT, 'CONTACT US').is_displayed()
+    print('Assertion on Contact Us successful')
     driver.find_element(By.XPATH, '//option[contains(@label, "Laptops")]').click()
     driver.find_element(By.XPATH, '//option[contains(@label, "HP Pavilion 15z Laptop")]').click()
     driver.find_element(By.NAME, 'emailContactUs').send_keys(aos_locators.email)
@@ -104,42 +118,76 @@ def topmenu():
         soc = aos_locators.list_social[r]
         sleep(st)
     assert driver.find_element(By.NAME, f'{soc}').is_displayed()
-    print(f'Assertion {aos_locators.list_social} Detected')
+    print(f'Assertion on {aos_locators.list_social}')
     driver.find_element(By.LINK_TEXT, 'CONTINUE SHOPPING').click()
 
 def shoppingcart():
-    driver.find_element(By.ID, 'speakersTxt').click()
+    global order
+    print('--------------------~*~--------------------')
+    print(f'Adding product #{aos_locators.rand} to shopping cart')
+    driver.get(f'{aos_locators.cart}')
+    item = driver.find_element(By.XPATH, '//h1[contains(@class,"roboto-regular screen768 ng-binding")]')
+    print(f'Item added {item.text}')
+    # if driver.find_element(By.CLASS_NAME, 'OutOfStock') == True:
+    #     shoppingcart()
+    # else:
+    driver.find_element(By.NAME, 'save_to_cart').click()
     sleep(st)
-    # driver.find_element(By.CLASS_NAME, 'Bose Soundlink Bluetooth Speaker III').click()
-    # driver.find_element(By.XPATH, f'//[,"Bose Soundlink Bluetooth Speaker III")]').click()
-    # assert driver.find_element(By.XPATH, '//*[contains(., "Bose Soundlink Bluetooth Speaker III")]').is_displayed()
-    # driver.find_element(By.XPATH, '//*[contains(., "Bose Soundlink Bluetooth Speaker III")]').click()
-    driver.find_element(By.XPATH, '//*[contains(., "AddToCard")]').click()
+    driver.find_element(By.ID, 'menuCart').click()
+    sleep(st)
+    driver.find_element(By.NAME, 'check_out_btn').click()
+    sleep(st)
+    driver.find_element(By.ID, 'next_btn').click()
+    sleep(st)
+    driver.find_element(By.NAME, 'safepay_username').send_keys(aos_locators.safe_pay_user)
+    sleep(st)
+    driver.find_element(By.NAME, 'safepay_password').send_keys(aos_locators.safe_pay_pass)
+    sleep(st)
+    driver.find_element(By.ID, 'pay_now_btn_SAFEPAY').click()
+    sleep(st)
+    assert driver.find_element(By.XPATH, '//*[contains(.,"Thank you for buying with Advantage")]').is_displayed()
+    print('Order has been Successful.')
+    for r in range(len(aos_locators.list_order)):
+        ord = aos_locators.list_order[r]
+        sleep(st)
+    assert driver.find_element(By.XPATH, f'//*[contains(.,"{ord}")]').is_displayed()
+    print(f'Assert on {aos_locators.list_order}')
+    sleep(st)
+    track = driver.find_element(By.ID, 'trackingNumberLabel')
+    order = driver.find_element(By.ID, 'orderNumberLabel')
+    total = driver.find_element(By.XPATH, "//label[contains(.,'TOTAL')]/a[@class='floater ng-binding']")
+    order, track, total = order.text, track.text, total.text
+    print(f'Tracking number is: {track}')
+    print(f'Order number is: {order}')
+    print(f'Total for order found = {total}')
+    sleep(st)
 
 def delete_user():
     print('--------------------~*~--------------------')
     driver.find_element(By.ID, 'hrefUserIcon').click()
     java_script = driver.find_element(By.XPATH, '//label[contains(.,"My account")]')
     driver.execute_script("arguments[0].click();", java_script)
-    sleep(3)
+    sleep(1)
     assert driver.find_element(By.XPATH, f'//*[contains(.,"MY ACCOUNT")]').is_displayed()
     print('Assertion done on My Account')
     driver.find_element(By.CLASS_NAME, 'deleteBtnText').click()
     sleep(st)
     assert driver.find_element(By.CLASS_NAME, 'deleteBtnContainer').is_displayed()
     driver.find_element(By.CLASS_NAME, 'deleteBtnContainer').click()
-    print(f'Account {aos_locators.new_username} has been Deleted.')
+    print(f'Account {aos_locators.new_username} has been Deleted')
     logger('Deleted')
 
 def orders():
     print('--------------------~*~--------------------')
+    print('Checking order page')
     driver.find_element(By.ID, 'hrefUserIcon').click()
     java_script = driver.find_element(By.XPATH, '//label[contains(.,"My orders")]')
     driver.execute_script("arguments[0].click();", java_script)
     assert driver.find_element(By.XPATH, f'//*[contains(.,"MY ORDERS")]').is_displayed()
     print('Assertion done on My Orders')
+    assert driver.find_element(By.XPATH, f'//*[contains(.,"{order}")]').is_displayed()
+    print(f'Order has been found {order}')
     sleep(st)
-    driver.find_element(By.LINK_TEXT, "CONTINUE SHOPPING").click()
 
 def logger(action):
     old_instance = sys.stdout
@@ -152,11 +200,15 @@ def logger(action):
     sys.stdout = old_instance
     log_file.close()
 
-# # #
+# # # # #
 # setUp()
-# # login()
-# # shoppingcart()
-# # # topmenu()
 # adduser()
+# # #
+# # # # # # login()
+# shoppingcart()
 # orders()
-# # delete_user()
+# # # delete_user()
+# # # # # # # topmenu()
+# #
+# # # orders()
+# # # delete_user()
