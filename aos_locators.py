@@ -35,9 +35,15 @@ list_ass = ['dvantage', 'SPEAKERS', 'TABLETS', 'HEADPHONES', 'LAPTOPS', 'MICE']
 list_social = ['follow_facebook', 'follow_twitter', 'follow_linkedin']
 list_order = [full_name, address, city, province, phone]
 
-#shopping cart
-# rand = 13
-rand = (random.randrange(1, 34))
+# Shopping Cart
+def rand1():
+    global rand
+    rand = (random.randrange(1, 34))
+    if rand == 13:
+        return rand1()
+    else:
+        return rand
+rand = rand1()
 cart = f'https://advantageonlineshopping.com/#/product/{rand}'
 
 kitty = '''.          /\.../\       

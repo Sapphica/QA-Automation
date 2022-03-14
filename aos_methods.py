@@ -1,6 +1,5 @@
 # !/usr/bin/env python3  Line 1
 # -*- coding: Windows-1252 -*- Line 2
-
 from selenium import webdriver  # import selenium to the file
 from selenium.webdriver.chrome.service import Service
 from time import sleep
@@ -10,11 +9,25 @@ import aos_locators
 import sys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-# from selenium.webdriver.chrome.options import Options
 
+#Headless
+# from selenium.webdriver.chrome.options import Options
+# options = Options()
+# options.add_argument("--headless")
+# options.add_argument("window-size=1400,1500")
+# options.add_argument("--disable-gpu")
+# options.add_argument("--no-sandbox")
+# options.add_argument("start-maximized")
+# options.add_argument("enable-automation")
+# options.add_argument("--disable-infobars")
+# options.add_argument("--disable-dev-shm-usage")
+# driver = webdriver.Chrome(options=options)
+
+# none headless
 s = Service(executable_path='chromedriver.exe')
 driver = webdriver.Chrome(service=s)
 driver.maximize_window()
+
 st = 0.25  # sleep time
 driver.implicitly_wait(20)
 driver.get(aos_locators.aos_url)
@@ -35,7 +48,7 @@ def setUp():
 
 def tearDown():
     if driver is not None:
-        print('--------------------~*~--------------------')
+        print('--------------------~*~--------------------\nClosing Browser\n--------------------~*~--------------------')
         print(f'The test Completed at: {datetime.datetime.now()}')
         sleep(st)
         driver.close()
@@ -59,7 +72,7 @@ def adduser():
     sleep(st)
     assert driver.find_element(By.XPATH, f'//*[contains(.,"{aos_locators.new_username}")]').is_displayed()
     print(f'--------------------~*~--------------------\nUser name {aos_locators.new_username} has been\
- created. Assert is Successful.')
+ created. Assert is Successful')
     logger('Created')
     sleep(st)
 
@@ -79,9 +92,9 @@ def login():
     driver.find_element(By.XPATH, '//input[contains(@name, "password")]').send_keys(aos_locators.new_password)
     sleep(st)
     driver.find_element(By.ID, 'sign_in_btnundefined').click()
-    print(f'--------------------~*~--------------------\n{aos_locators.new_username} with pass {aos_locators.new_password} logged in.')
+    print(f'--------------------~*~--------------------\n{aos_locators.new_username} with pass {aos_locators.new_password} logged in')
     assert driver.find_element(By.XPATH, f'//*[contains(.,"{aos_locators.new_username}")]').is_displayed()
-    print(f'User name {aos_locators.new_username} Assert is Successful.')
+    print(f'User name {aos_locators.new_username} Assert is Successful')
     sleep(st)
 
 def topmenu():
@@ -133,8 +146,6 @@ def shoppingcart():
     # else:
     driver.find_element(By.NAME, 'save_to_cart').click()
     sleep(st)
-    driver.find_element(By.ID, 'menuCart').click()
-    sleep(st)
     driver.find_element(By.NAME, 'check_out_btn').click()
     sleep(st)
     driver.find_element(By.ID, 'next_btn').click()
@@ -146,7 +157,7 @@ def shoppingcart():
     driver.find_element(By.ID, 'pay_now_btn_SAFEPAY').click()
     sleep(st)
     assert driver.find_element(By.XPATH, '//*[contains(.,"Thank you for buying with Advantage")]').is_displayed()
-    print('Order has been Successful.')
+    print('Order has been Successful')
     for r in range(len(aos_locators.list_order)):
         ord = aos_locators.list_order[r]
         sleep(st)
@@ -156,10 +167,9 @@ def shoppingcart():
     track = driver.find_element(By.ID, 'trackingNumberLabel')
     order = driver.find_element(By.ID, 'orderNumberLabel')
     total = driver.find_element(By.XPATH, "//label[contains(.,'TOTAL')]/a[@class='floater ng-binding']")
-    order, track, total = order.text, track.text, total.text
-    print(f'Tracking number is: {track}')
-    print(f'Order number is: {order}')
-    print(f'Total for order found = {total}')
+    date = driver.find_element(By.XPATH, "//label[contains(.,'Date ordered')]/a[@class='floater ng-binding']")
+    order, track, date, total = order.text, track.text, date.text, total.text
+    print(f'Tracking number found: {track}\nOrder number found: {order}\nOrder date found: {date}\nTotal for order found = {total}')
     sleep(st)
 
 def delete_user():
@@ -186,7 +196,7 @@ def orders():
     assert driver.find_element(By.XPATH, f'//*[contains(.,"MY ORDERS")]').is_displayed()
     print('Assertion done on My Orders')
     assert driver.find_element(By.XPATH, f'//*[contains(.,"{order}")]').is_displayed()
-    print(f'Order has been found {order}')
+    print(f'Order has been found: {order}')
     sleep(st)
 
 def logger(action):
@@ -207,8 +217,8 @@ def logger(action):
 # # # # # # login()
 # shoppingcart()
 # orders()
-# # # delete_user()
-# # # # # # # topmenu()
-# #
+# # # # delete_user()
+# # # # # # # # topmenu()
+# # #
 # # # orders()
 # # # delete_user()
