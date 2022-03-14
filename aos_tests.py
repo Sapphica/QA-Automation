@@ -2,7 +2,6 @@
 # -*- coding: Windows-1252 -*- Line 2
 
 import unittest
-import aos_locators as locators
 import aos_methods as methods
 
 class AosAppPositiveTestCases(unittest.TestCase):
@@ -23,5 +22,3 @@ class AosAppPositiveTestCases(unittest.TestCase):
             (  •.•  )           
              ..=*=..            
        **~~( .\.||./ )  ©Have a kitty day! ''')
-
-

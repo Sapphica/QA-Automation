@@ -9,7 +9,6 @@ safe_pay_user = 'spuser'
 safe_pay_pass ='Pass123'
 aos_url = 'https://advantageonlineshopping.com/#/'
 aos_home_page_title = '\xa0Advantage Shopping'
-
 # ------------------data section-----------------
 first_name = fake.first_name()
 last_name = fake.last_name()
@@ -22,19 +21,16 @@ phone = fake.phone_number()[:13]
 postal = fake.postcode()
 province = fake.province()[:10]
 address = fake.street_address()
-
 # Input from faker
 list_reg = ['usernameRegisterPage', 'emailRegisterPage', 'passwordRegisterPage', 'confirm_passwordRegisterPage',
 'first_nameRegisterPage', 'last_nameRegisterPage', 'phone_numberRegisterPage', 'cityRegisterPage',
 'state_/_province_/_regionRegisterPage', 'postal_codeRegisterPage', 'addressRegisterPage']
 list_vars = [new_username, email, new_password, new_password, first_name, last_name, phone, city,
 province, postal, address]
-
 # Page assertion
 list_ass = ['dvantage', 'SPEAKERS', 'TABLETS', 'HEADPHONES', 'LAPTOPS', 'MICE']
 list_social = ['follow_facebook', 'follow_twitter', 'follow_linkedin']
 list_order = [full_name, address, city, province, phone]
-
 # Shopping Cart Gen
 def rand1():
     global rand
@@ -45,7 +41,6 @@ def rand1():
         return rand
 rand = rand1()
 cart = f'https://advantageonlineshopping.com/#/product/{rand}'
-
 kitty = '''.          /\.../\       
            (  •.•  )        
            ..=*=..          
