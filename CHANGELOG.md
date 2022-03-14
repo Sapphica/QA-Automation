@@ -51,4 +51,14 @@ Updated text file and added stuff
 March 13, 2022
 
 Started a Changelog file. 
+
+
+
+### Version 1.4 
+
+(aos.methods.py)
+
+March 15, 2022
+
+Updated Methods to run in headless mode. 
   
