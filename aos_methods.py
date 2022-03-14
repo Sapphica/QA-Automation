@@ -1,14 +1,14 @@
 # !/usr/bin/env python3  Line 1
 # -*- coding: Windows-1252 -*- Line 2
 from selenium import webdriver  # import selenium to the file
-from selenium.webdriver.chrome.service import Service
 from time import sleep
 import datetime
 from selenium.webdriver.common.by import By
 import aos_locators
 import sys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
 
 #Headless
 from selenium.webdriver.chrome.options import Options
@@ -209,15 +209,3 @@ def logger(action):
           f'{action}')
     sys.stdout = old_instance
     log_file.close()
-
-# # # # #
-# setUp()
-# adduser()
-# # #
-# # # # # # login()
-# shoppingcart()
-# orders()
-# # # # delete_user()
-# # # # # # # # topmenu()
-# # #
-# # # orders()
